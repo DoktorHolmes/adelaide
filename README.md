@@ -16,7 +16,8 @@ You can find the original Cakechat here:
 https://github.com/lukalabs/cakechat
 
 
-# CakeChat: Emotional Generative Dialog System
+# Original Readme
+## CakeChat: Emotional Generative Dialog System
 CakeChat is a dialog system that is able to express emotions in a text conversation. [Try it online!](https://cakechat.replika.ai/) 
 ![Demo](https://user-images.githubusercontent.com/764902/34832660-92570bfe-f6fe-11e7-9802-db2f8730a997.png) It is written in [Theano](http://deeplearning.net/software/theano/) and [Lasagne](https://github.com/Lasagne/Lasagne). It 
 uses end-to-end trained embeddings of 5 different emotions to generate responses conditioned by a given emotion. The code is flexible and allows to condition a response by an arbitrary categorical variable defined for some 

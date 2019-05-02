@@ -13,3 +13,6 @@ telepot==12.5
 gensim==1.0.1
 six==1.11.0
 cachetools==2.1.0
+discord.py==1.0.1
+textblob==0.15.3
+

@@ -11,7 +11,7 @@ _logger = get_logger(__name__)
 app = Flask(__name__)
 
 
-@app.route('/cakechat_api/v1/actions/get_response', methods=['POST'])
+@app.route('/cakechat_api/v1/actions/get_response', methods=['POST','GET'])
 @timer
 def get_model_response():
     params = request.get_json()

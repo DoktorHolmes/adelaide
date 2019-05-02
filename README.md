@@ -1,4 +1,4 @@
-#Adelaide: A Discord-based Emotional Chatbot
+##Adelaide: A Discord-based Emotional Chatbot
 
 Adelaide is my personal experiment with lukalabs' Cakechat program.  I've added discord.py support, sentiment analysis with the TextBlob library, and there is more to come.
 

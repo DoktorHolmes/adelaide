@@ -63,7 +63,7 @@ async def on_message(message):
     if not (message.author == client.user): #Check to ensure the bot does not respond to its own messages
         if(client.user.mentioned_in(message) or isinstance(message.channel, discord.abc.PrivateChannel)): #Check if the bot is mentioned or if the message is in DMs
             async with message.channel.typing(): #Show that the bot is typing
-                txtinput = message.content.replace("<@" + "CLIENT_ID_GOES_HERE" + ">", "")  #Filter out the mention so the bot does not get confused, replace CLIENT_ID_GOES_HERE with your bot's client ID
+                txtinput = message.content.replace("<@" + str(client.user.id) + ">", "")  #Filter out the mention so the bot does not get confused
                 if(len(txtinput) > 220): #Spam protection
                     txt = "I am sorry, that is too long for me."
                 else:

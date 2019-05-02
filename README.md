@@ -9,3 +9,6 @@ If you do not have a discord bot, you can get one here: https://discordapp.com/d
 Currently it uses lukalabs' pretrained model until I can get hardware sufficient to train it myself.  
 Run "python tools/download_model.py" to download the pre-trained model.
 
+
+You can find the original Cakechat here:
+https://github.com/lukalabs/cakechat

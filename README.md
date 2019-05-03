@@ -2,6 +2,13 @@
 
 Adelaide is my personal experiment with lukalabs' Cakechat program.  I've added discord.py support, sentiment analysis with the TextBlob library, and there is more to come.
 
+<a href="https://discordbotlist.com/bots/571924469661302814">
+    <img 
+        width="380" 
+        height="140" 
+        src="https://discordbotlist.com/bots/571924469661302814/widget" 
+        alt="Lithium stats on Discord Bot List">
+</a>
 
 SETUP:
 Clone the repository and run "pip install -r requirements.txt".  You will need Python 3.6.8 for the program to run well.  

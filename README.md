@@ -11,7 +11,8 @@ Adelaide is my personal experiment with lukalabs' Cakechat program.  I've added 
 </a>
 
 SETUP:
-Clone the repository and run "pip install -r requirements.txt".  You will need Python 3.6.8 for the program to run well.  
+The recommended python version is 3.6.8 for all dependencies to match up well, and I recommend running it on the Linux distro of your choice.  Windows will also work but you will need to install it via anaconda.
+Clone the repository and run "pip install -r requirements.txt".  
 Then, open "tools/discord_bot.py" and change the discord API token to your application's bot token.  
 If you do not have a discord bot, you can get one here: https://discordapp.com/developers/applications/
 

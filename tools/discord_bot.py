@@ -30,10 +30,17 @@ _context = deque(maxlen=INPUT_CONTEXT_SIZE)
 
 from cakechat.api.v1.server import app
 
+def getAllUsersCount():
+    guilds = client.guilds
+    user_count = 0
+    for g in guilds:
+         user_count += len(g.members)
+    return("Current user count: " + str(user_count))
+
 @client.event
 async def on_ready():
     mood = 0.0
-    print('Logged in as '+client.user.name+' (ID:'+str(client.user.id)+') | '+str(len(client.guilds))+' servers')
+    print('Logged in as '+client.user.name+' (ID:'+str(client.user.id)+') | '+str(len(client.guilds))+' servers | ' + getAllUsersCount())
     await client.change_presence(activity=discord.Game(name='chat with me!'))
 
 #Determine the intent of a sentence and the emotion to respond with (TODO: This should be more dynamic! Rework coming eventually)

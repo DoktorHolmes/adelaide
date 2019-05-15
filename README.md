@@ -10,7 +10,7 @@ Adelaide is my personal experiment with lukalabs' Cakechat program.  I've added 
         alt="Lithium stats on Discord Bot List">
 </a>
 
-SETUP:
+## SETUP:
 The recommended python version is 3.6.8 for all dependencies to match up well, and I recommend running it on the Linux distro of your choice.  Windows will also work but you will need to install it via anaconda.
 Clone the repository and run "pip install -r requirements.txt".  
 Then, open "tools/discord_bot.py" and change the discord API token to your application's bot token.  
@@ -23,6 +23,38 @@ Run "python tools/download_model.py" to download the pre-trained model.
 You can find the original Cakechat here:
 https://github.com/lukalabs/cakechat
 
+## SAMPLES:
+```
+User: How are you holding up?
+Bot: I'm doing my job.
+User: I am very proud of you, you have over 50,000 friends now!
+Bot: Thank you!
+User: You should feel proud too.
+Bot: I'm glad that you are happy with my life.
+```
+
+
+```
+User: I want to see Avengers.
+Bot: I'll be there.
+User: Awesome, we'll see it together
+Bot: I'm going to see it
+User: Yeah
+Bot: Did you watch it?
+User: I saw the older ones but Endgame isn't out yet
+Bot: I'm ready to see what happens!
+```
+
+```
+User: Hi there! What's going on?
+Bot: I've been to the hospital since you were here.
+User: Whoa, why were you in the hospital?
+Bot: My stomach is just a bit swollen but I'm fine.
+User: That sounds really bad. Feel better.
+Bot: Thanks, can I have a hug?
+User: Sure. * hugs *
+Bot: * hugs back *
+```
 
 # Original Readme
 ## CakeChat: Emotional Generative Dialog System

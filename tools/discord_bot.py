@@ -39,12 +39,54 @@ def getAllUsersCount():
 
 @client.event
 async def on_ready():
-    mood = 0.0
     print('Logged in as '+client.user.name+' (ID:'+str(client.user.id)+') | '+str(len(client.guilds))+' servers | ' + getAllUsersCount())
     await client.change_presence(activity=discord.Game(name='chat with me!'))
+    global es
+    es = EmotionState()
+
+
+
+
+class EmotionState: #Class to store emotional dats
+    def __init__(self):
+        self.thought_polarity = 0.0 #Positivity/Negativity
+        self.thought_subjectivity = 0.0 #Subjectivity/Objectivity
+        self.emotions_dividend = 2.3 #Controls intensity of the sentiment detection; lower is more intense, higher is less
+
+    async def new_sentiment_analysis(self, input):
+        txtblob = TextBlob(input)
+        sent = txtblob.sentiment
+        COND = DEFAULT_CONDITION
+        #TO-DO: More fine tuning
+        if(sent.subjectivity < 0.27):
+            self.thought_subjectivity -= sent.subjectivity / 3
+        else:
+            self.thought_subjectivity += sent.subjectivity / 3
+        if(self.thought_subjectivity < 0.0):
+            self.thought_subjectivity = 0.0
+        if(self.thought_subjectivity > 1.0):
+            self.thought_subjectivity = 1.0
+        self.thought_polarity += sent.polarity / self.emotions_dividend #Adjust polarity based on sentiment detection results
+        if(self.thought_polarity < -1.0):
+            self.thought_polarity = -1.0
+        if(self.thought_polarity > 1.0):
+            self.thought_polarity = 1.0
+        if(self.thought_subjectivity >= 0.0 and self.thought_subjectivity <= 0.3 and self.thought_polarity > -0.7 and self.thought_polarity < 0.3): #If feeling neutral and indifferent, then change condition to neutral
+            COND = "neutral"
+        if(self.thought_subjectivity >= 0.3 and self.thought_polarity >= 0.45):
+            COND = "joy"
+        if(self.thought_subjectivity >= 0.4 and self.thought_polarity <= -0.1):
+            COND = "sadness"
+        if(self.thought_subjectivity >= 0.55 and self.thought_polarity <= -0.45):
+            COND = "anger"
+        if(self.thought_subjectivity >= 0.15 and self.thought_polarity <= -0.75):
+            COND = "fear"
+        return COND #Return the condition to respond with!
+
+
 
 #Determine the intent of a sentence and the emotion to respond with (TODO: This should be more dynamic! Rework coming eventually)
-async def sentiment_analysis(input): 
+def sentiment_analysis(input): 
     txtblob = TextBlob(input)
     sent = txtblob.sentiment
     #The below values should be fine-tuned or replaced completely with a more dynamic system
@@ -60,7 +102,7 @@ async def sentiment_analysis(input):
         COND = "sadness"
     else:
         COND = DEFAULT_CONDITION
-    await client.change_presence(activity=discord.Game(name='feeling ' + COND)) #Display the bot's emotion as a status
+    #await client.change_presence(activity=discord.Game(name='feeling ' + COND)) #Display the bot's emotion as a status
     return COND #Return the condition to respond with!
 
 
@@ -75,9 +117,9 @@ async def on_message(message):
                     txt = "I am sorry, that is too long for me."
                 else:
                     _context.append(txtinput)
-                    COND = await sentiment_analysis(txtinput) #Determine how to respond to the sentence emotionally
+                    COND = await es.new_sentiment_analysis(txtinput) #Determine how to respond to the sentence emotionally
+                    await client.change_presence(activity=discord.Game(name='feeling ' + COND)) #Display the bot's emotion as a status
                     txt = get_response(_context, COND) #Get a response!
-                await message.channel.send(txt) #Fire away!
-
+                bot_message = await message.channel.send(txt) #Fire away!
 print('Starting...')
 client.run('TOKEN_GOES_HERE') #Replace TOKEN_GOES_HERE with your bot's API token

@@ -51,17 +51,15 @@ class EmotionState: #Class to store emotional dats
     def __init__(self):
         self.thought_polarity = 0.0 #Positivity/Negativity
         self.thought_subjectivity = 0.0 #Subjectivity/Objectivity
-        self.emotions_dividend = 2.3 #Controls intensity of the sentiment detection; lower is more intense, higher is less
+        self.emotions_dividend = 2.25 #Controls intensity of the sentiment detection; lower is more intense, higher is less
 
     async def new_sentiment_analysis(self, input):
         txtblob = TextBlob(input)
         sent = txtblob.sentiment
         COND = DEFAULT_CONDITION
         #TO-DO: More fine tuning
-        if(sent.subjectivity < 0.27):
-            self.thought_subjectivity -= sent.subjectivity / 3
-        else:
-            self.thought_subjectivity += sent.subjectivity / 3
+        self.thought_subjectivity += sent.subjectivity
+        self.thought_subjectivity -= 0.25
         if(self.thought_subjectivity < 0.0):
             self.thought_subjectivity = 0.0
         if(self.thought_subjectivity > 1.0):
@@ -71,9 +69,9 @@ class EmotionState: #Class to store emotional dats
             self.thought_polarity = -1.0
         if(self.thought_polarity > 1.0):
             self.thought_polarity = 1.0
-        if(self.thought_subjectivity >= 0.0 and self.thought_subjectivity <= 0.3 and self.thought_polarity > -0.7 and self.thought_polarity < 0.3): #If feeling neutral and indifferent, then change condition to neutral
+        if(self.thought_subjectivity >= 0.0 and self.thought_subjectivity <= 0.4): #If feeling neutral and indifferent, then change condition to neutral
             COND = "neutral"
-        if(self.thought_subjectivity >= 0.3 and self.thought_polarity >= 0.45):
+        if(self.thought_subjectivity >= 0.4 and self.thought_polarity >= 0.72):
             COND = "joy"
         if(self.thought_subjectivity >= 0.4 and self.thought_polarity <= -0.1):
             COND = "sadness"
@@ -81,6 +79,7 @@ class EmotionState: #Class to store emotional dats
             COND = "anger"
         if(self.thought_subjectivity >= 0.15 and self.thought_polarity <= -0.75):
             COND = "fear"
+        print("Condition: " + COND + "; Polarity: " + str(self.thought_polarity) + "; Subjectivity: " + str(self.thought_subjectivity))
         return COND #Return the condition to respond with!
 
 
